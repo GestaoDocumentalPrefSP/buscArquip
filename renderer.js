@@ -1,19 +1,12 @@
-const fs = require('fs');
-const path = require('path');
-const XLSX = require('xlsx');
 
-/* num teste
-2000-0.188.203-8 retirado
-1978-0.000.195-4 ACERVO
-*/
 
-const btn_busca = document.getElementById("buscarProcesso"); 
+const btn_busca = document.getElementById("buscarProcesso");
 let saida = "";
 
-document.addEventListener('keydown',  (pressiona) => { 
-    if (pressiona.keyCode === 13) { 
-        btn_busca.click(); 
-    }
+document.addEventListener('keydown', (pressiona) => {
+  if (pressiona.keyCode === 13) {
+    btn_busca.click();
+  }
 });
 
 async function buscarProcesso() {
@@ -28,36 +21,35 @@ async function buscarProcesso() {
   try {
     const response = await fetch("https://arquip.prefeitura.sp.gov.br/Assets/busca_arquip/status.json");
     const statusData = await response.json();
-    
+
     console.log(statusData)
     console.log("Buscando número:", numeroProcesso);
 
     if (statusData[numeroProcesso] === "SAIU") {
-        console.log(statusData[numeroProcesso],"🟥 O processo está FORA do acervo.");
-        saida = "🟥 O processo está FORA do acervo.";
+      console.log(statusData[numeroProcesso], "🟥 FORA do acervo.");
+      saida = "🟥 FORA do acervo.";
       resultadoDiv.textContent = saida;
     } else if (statusData[numeroProcesso] === "ACERVO") {
-      saida = "🟩 O processo está NO ACERVO.";
+      saida = "🟩 NO ACERVO.";
       resultadoDiv.textContent = saida;
-        console.log(statusData[numeroProcesso],"🟩 O processo está NO ACERVO.");
+      console.log(statusData[numeroProcesso], "🟩 NO ACERVO.");
     } else {
       saida = "❌ Processo não encontrado.";
       resultadoDiv.textContent = saida;
-        console.log(statusData[numeroProcesso],"❌ Processo não encontrado.");
+      console.log(statusData[numeroProcesso], "❌ Processo não encontrado.");
     }
 
   } catch (error) {
     resultadoDiv.textContent = "Erro ao acessar o status. Verifique sua conexão.";
     console.error(error);
   }
-  // Caminho da planilha
-  const filePath = path.join(__dirname, 'data', 'processos.xlsx');
 
   // Lê a planilha
-  const workbook = XLSX.readFile(filePath);
-  const sheetName = workbook.SheetNames[0];
-  const sheet = workbook.Sheets[sheetName];
-  const dados = XLSX.utils.sheet_to_json(sheet);
+  const dados = await window.electronAPI.lerPlanilha();
+  if (!dados) {
+    resultadoDiv.innerHTML = '<p>Erro ao ler os dados da planilha.</p>';
+    return;
+  }
 
   // Busca o processo
   const processo = dados.find(p => String(p.PROCESSOS).trim() === numeroProcesso);
@@ -68,18 +60,18 @@ async function buscarProcesso() {
     resultadoDiv.innerHTML = `
       <p><strong>Processo:</strong> ${processo.PROCESSOS}</p>
       <p><strong>Localização:</strong> Rua ${processo.RUA}, Estante ${processo.ESTANTE}, Pacote ${processo.PACOTE}</p>
-      <p><strong>Situação:</strong><span id="situacao-texto">${situacao}</span> </p>
-      <button id="btn-toggle" style="margin-top: 10px;">Alterar Situação</button>
+      <p class="container-altera"><strong>Situação:</strong><span id="situacao-texto">${situacao}</span> <button id="btn-toggle"><img src="./assets/change_circle.svg" alt="alterar situação"> Alterar Status</button></p>
+      
 
       <div id="confirmacao-overlay" class="overlay hidden">
-  <div class="caixa-confirmacao">
-    <p id="confirmacao-texto">Deseja realmente alterar o status deste processo?</p>
-    <div class="botoes">
-      <button id="btn-confirmar">Sim</button>
-      <button id="btn-cancelar">Cancelar</button>
-    </div>
-  </div>
-</div>
+        <div class="caixa-confirmacao">
+          <p id="confirmacao-texto">Deseja realmente alterar o status deste processo?</p>
+          <div class="botoes">
+            <button id="btn-cancelar">Cancelar</button>
+            <button id="btn-confirmar">Sim</button>
+          </div>
+        </div>
+      </div>
     `;
   } else {
     resultadoDiv.innerHTML = '<p>Processo não encontrado.</p>';

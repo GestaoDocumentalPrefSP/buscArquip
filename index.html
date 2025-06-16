@@ -1,16 +1,24 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <title>Busca Arquip</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <div class="container">
-    <h1>Buscar Processo</h1>
-    <input type="text" id="input-processo" placeholder="Digite o número do processo">
-    <button id="buscarProcesso" onclick="buscarProcesso()">Buscar</button>
+    <h1>BUSCAR PROCESSO</h1>
+    <div class="containerBusca">
+      <input type="text" id="input-processo" placeholder="Digite o número do processo">
+      <button id="buscarProcesso" onclick="buscarProcesso()"><img src="./assets/search.svg" alt="busca"> Buscar</button>
+    </div>
 
     <div id="resultado" class="resultado"></div>
   </div>
@@ -18,4 +26,5 @@
   <script src="renderer.js"></script>
   <script src="status.js"></script>
 </body>
+
 </html>

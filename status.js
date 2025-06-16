@@ -7,11 +7,11 @@ document.addEventListener('click', function (e) {
 
         let novoTexto, novoStatus;
 
-        if (situacaoAtual.includes('🟥 O processo está FORA do acervo.')) {
-            novoTexto = '🟩 O processo está NO ACERVO.';
+        if (situacaoAtual.includes('🟥 FORA do acervo.')) {
+            novoTexto = '🟩 NO ACERVO.';
             novoStatus = 'ACERVO';
-        } else if (situacaoAtual.includes('🟩 O processo está NO ACERVO.')) {
-            novoTexto = '🟥 O processo está FORA do acervo.';
+        } else if (situacaoAtual.includes('🟩 NO ACERVO.')) {
+            novoTexto = '🟥 FORA do acervo.';
             novoStatus = 'SAIU';
         } else {
             alert("Situação desconhecida.");

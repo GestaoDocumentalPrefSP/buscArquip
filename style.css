@@ -1,42 +1,125 @@
 /* style.css */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  background-color: #4EA9E2;
   margin: 0;
-  padding: 40px;
+  padding: 50px;
   display: flex;
   justify-content: center;
+   background-image: url(./assets/Logo-ARQUIP-branco-space.png);
+  background-size: 85px;
+  background-repeat: repeat;
 }
 
 .container {
   max-width: 500px;
   width: 100%;
-  background: white;
+  background: #ffffff;
   padding: 30px;
+  padding-top: 0;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px #899194;
+  line-height: 1.5;
+}
+
+.container h1 {
+  color: #f9f9f9;
+  background-color: #0881C8; 
+  font-size: 22px;
+  margin: 0 -30px;
+  padding: 5px 30px;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
 }
 
 input {
-  width: 80%;
+  width: 70%;
   padding: 10px;
-  margin-bottom: 15px;
+  margin: 15px 0;
   font-size: 16px;
 }
 
+input#input-processo {
+  border: #0881C8 2px solid;
+  border-radius: 8px 0 0 8px;
+}
+
+input#input-processo:focus {
+  border-color: #0881C8;
+  outline: none;
+  box-shadow: 0 0 5px #0881C8;
+}
+
 button {
-  padding: 10px 20px;
-  font-size: 16px;
   cursor: pointer;
+}
+
+.containerBusca {
+  display: flex;
+}
+
+#buscarProcesso {
+  width: 30%;
+  color: #E3E3E3;
+  background-color: #0881C8;
+  font-size: 20px;
+  margin: 15px 0;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 0 8px 8px 0;
+}
+
+button#buscarProcesso:hover {
+  background-color: #066da6;
+  transform: scale(1.02);
 }
 
 .resultado {
   margin-top: 20px;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:"wdth" 100;
 }
 
 .resultado p {
   font-size: 18px;
   color: #333;
+}
+
+.container-altera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#btn-toggle {
+  width: 30%;
+  color: #E3E3E3;
+  background-color: #0881C8;
+  font-size: 16px;
+  padding: 5px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+}
+
+button#btn-toggle:hover {
+  background-color: #066da6;
+  transform: scale(1.02);
 }
 
 /* modal confirmação */
@@ -62,12 +145,44 @@ button {
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-.botoes {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-around;
-}
-
 .hidden {
   display: none;
+}
+
+.botoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#btn-confirmar, #btn-cancelar {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  transition: background-color 0.2s, transform 0.1s;
+  cursor: pointer;
+}
+
+/* Botão Cancelar (menos chamativo) */
+#btn-cancelar {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+#btn-cancelar:hover {
+  background-color: #c2c2c2;
+  transform: scale(1.02);
+}
+
+/* Botão Confirmar (mais visível) */
+#btn-confirmar {
+  background-color: #0881C8; /* Azul institucional */
+  color: #fff;
+}
+
+#btn-confirmar:hover {
+  background-color: #066da6;
+  transform: scale(1.02);
 }
