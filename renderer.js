@@ -60,7 +60,9 @@ async function buscarProcesso() {
     resultadoDiv.innerHTML = `
       <p><strong>Processo:</strong> ${processo.PROCESSOS}</p>
       <p><strong>Localização:</strong> Rua ${processo.RUA}, Estante ${processo.ESTANTE}, Pacote ${processo.PACOTE}</p>
-      <p class="container-altera"><strong>Situação:</strong><span id="situacao-texto">${situacao}</span> <button id="btn-toggle"><img src="./assets/change_circle.svg" alt="alterar situação"> Alterar Status</button></p>
+      <p class="container-altera"><strong>Situação:</strong><span id="situacao-texto">${situacao}</span> <button id="btn-toggle">
+        <img id="img-toggle" src="" alt="alterar situação"> Alterar Status</button>
+      </p>
       
 
       <div id="confirmacao-overlay" class="overlay hidden">
@@ -73,8 +75,12 @@ async function buscarProcesso() {
         </div>
       </div>
     `;
+    
+
+    document.getElementById('img-toggle').src = `${change_circle}`;
+
   } else {
-    resultadoDiv.innerHTML = '<p>Processo não encontrado.</p>';
+    resultadoDiv.innerHTML = '<p>❌ Processo não encontrado.</p>';
   }
 }
 

@@ -6,7 +6,7 @@ body {
   padding: 50px;
   display: flex;
   justify-content: center;
-   background-image: url(./assets/Logo-ARQUIP-branco-space.png);
+  background-image: url('./build/Logo-ARQUIP-branco-space.png');
   background-size: 85px;
   background-repeat: repeat;
 }
