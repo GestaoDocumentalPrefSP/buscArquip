@@ -1,7 +1,10 @@
 {
   "name": "buscador-de-processos",
   "version": "1.0.0",
+  "description": "Buscador de processos mapeados do ARQUIP",
   "main": "main.js",
+  "author": "VMacabu",
+  "license": "ISC",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",
@@ -10,30 +13,43 @@
   "build": {
     "appId": "com.buscador.ARQUIP",
     "productName": "BuscARQUIP",
-    "icon": "assets/Logo.ico",
+    "icon": "build/Logo",
     "files": [
+      "index.html","main.js",
+      "renderer.js",
+      "preload.js",
+      "build/**/*",
+      "data/**/*",
       "**/*",
       "!node_modules/*/{test,__tests__}/**",
       "!**/*.md"
-  ],
-  
-  "directories": {
-    "buildResources": "assets"  
+    ],
+    "extraResources": [
+      {
+        "from": "build/",
+        "to": "build/",
+        "filter": ["**/*"]
+      },
+      {
+        "from": "data/",
+        "to": "data/",
+        "filter": ["**/*"]
+      }
+    ],
+    "directories": {
+      "buildResources": "./build"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/Logo.ico"
+    }
   },
-  "win": {
-    "target": "nsis",
-    "icon": "assets/Logo.ico"
-  }
-},
-  "keywords": [],
-  "author": "VMacabu",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
+    "node-fetch": "^3.3.2",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "electron-builder": "^26.0.12",
-    "electron": "^36.4.0"
+    "electron": "^36.4.0",
+    "electron-builder": "^26.0.12"
   }
 }
