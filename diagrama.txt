@@ -1,0 +1,57 @@
+
+Diagrama Arquitetural - Sistema com Electron + PHP API
+
++---------------------------+
+|   🖥️  Electron App        |     <- Dispositivo do Usuário
+|---------------------------|
+|  Renderer Process         |     <- HTML, CSS, JS
+|  (Interface Gráfica)      |
+|                           |
+|  Main Process             |     <- Node.js
+|  (Lógica e Comunicação)   |
++---------------------------+
+             |
+             | HTTPS (fetch, axios, etc.)
+             v
++---------------------------+
+|   🌐 Servidor Web         |
+|---------------------------|
+|  API em PHP               |
+|  (Recebe e processa req.) |
+|                           |
+|  PHP comunica com BD      |
++---------------------------+
+             |
+             | SQL (MySQL / PostgreSQL)
+             v
++---------------------------+
+|   🗄️ Banco de Dados        |
+|---------------------------|
+|  Tabela de Processos      |
+|  - ID                     |
+|  - Localização            |
+|  - Status                 |
+|  - Última Atualização     |
++---------------------------+
+
+
+🔄 Fluxo de Dados
+Usuário abre o aplicativo Electron.
+
+A interface (Renderer) exibe dados ou botões.
+
+A interação do usuário (ex: buscar processo) chama uma função no Main Process.
+
+O Main Process (Node.js) faz uma requisição via fetch ou axios para a API PHP.
+
+A API PHP consulta ou atualiza o banco de dados.
+
+A resposta (dados do processo) retorna ao Electron e é exibida ao usuário.
+
+🧰 Tecnologias Usadas
+Camada	Tecnologia
+Interface	HTML, CSS, JS
+Lógica Local	Node.js (Electron)
+Backend Remoto	PHP (REST API)
+Banco de Dados	MySQL 
+Comunicação Cliente	HTTPS (fetch, axios)
